@@ -5,6 +5,7 @@ from sk_dsp_comm import digitalcom as dc
 from numpy import testing as npt
 from scipy import signal
 
+
 class TestDigitalcom(SKDSPCommTest):
     _multiprocess_can_split_ = True
 
@@ -420,3 +421,15 @@ class TestDigitalcom(SKDSPCommTest):
         z_out, H = dc.OFDM_rx(r_out, 32, 64, 100, True, 10, alpha=0.95, ht=hc)
         npt.assert_almost_equal(z_out[:50], z_out_test)
         npt.assert_almost_equal(H[:50], H_out_test)
+
+    def test_QAM_gray_encode_bb_m2(self):
+        """
+        BPSK
+        :return:
+        """
+        data_to_test = [x for x in range(0, 3)]
+        x_test, b_test, tx_data_test = (np.array([-1.+1.j]), 1, [0, 1])
+        x, b, tx_data = dc.QAM_gray_encode_bb(None, 1, ext_data=data_to_test)
+        npt.assert_almost_equal(x, x_test)
+        npt.assert_almost_equal(b, b_test)
+        npt.assert_almost_equal(tx_data, tx_data_test)
