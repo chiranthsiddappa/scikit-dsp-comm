@@ -1584,6 +1584,9 @@ def QAM_gray_decode(x_hat,M = 4):
     """
     # Inverse Gray code LUTs for 4, 16, 64, and 256 QAM
     # which employs M = 2, 4, 6, and 8 bits per symbol
+    m_vals = [2, 4, 16, 64, 256]
+    if M not in m_vals:
+        raise ValueError('M must be 2, 4, 16, 64, 256')
     gray2bin1 = [0,1]
     gray2bin2 = [0,1,3,2]
     gray2bin3 = [0,1,3,2,6,7,5,4] # arange(8) 
@@ -1624,8 +1627,6 @@ def QAM_gray_decode(x_hat,M = 4):
             data_hat[2*k*N_word:2*(k+1)*N_word] \
               = np.hstack((to_bin(gray2bin4[k_hat_grayI[k]],N_word),
                         to_bin(gray2bin4[k_hat_grayQ[k]],N_word)))
-        else:
-            raise ValueError('M must be 2, 4, 16, 64, 256')  
             
     return data_hat
 
