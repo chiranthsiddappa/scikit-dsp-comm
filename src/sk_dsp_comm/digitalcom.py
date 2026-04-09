@@ -1199,13 +1199,13 @@ def pcm_encode(x, n_bits):
 
     Mark Wickert, Mark 2015
     """
-    xq = np.int16(np.rint(x * 2 ** (n_bits - 1)))
+    xq = (np.rint(x * 2 ** (n_bits - 1))).astype(int)
     x_bits = np.zeros((n_bits, len(xq)))
     for k, xk in enumerate(xq):
         x_bits[:,k] = to_bin(xk, n_bits)
     # Reshape into a serial bit stream
     x_bits = np.reshape(x_bits, (1, len(x) * n_bits), 'F')
-    return np.int16(x_bits.flatten())
+    return (x_bits.flatten()).astype(int)
 
 
 # A helper function for PCM_encode and elsewhere
