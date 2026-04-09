@@ -214,7 +214,7 @@ class FECHamming(object):
             # convert binary syndrome to an integer
             bits = ''
             for m in range(0,len(S)):
-                bit = str(int(S[m,:]))
+                bit = str(int(S[m,:][0]))
                 bits = bits + bit
             error_pos = int(bits,2)
             h_pos = self.H[:,error_pos-1]
