@@ -154,8 +154,8 @@ class TestSigsys(SKDSPCommTest):
         npt.assert_almost_equal(f_out, f_out_check)
 
     def test_cascade_filters(self):
-        b1, a1 = signal.butter(3, [0.1])
-        b2, a2 = signal.butter(3, [0.15])
+        b1, a1 = signal.butter(3, 0.1)
+        b2, a2 = signal.butter(3, 0.15)
         b, a = ss.cascade_filters(b1, a1, b2, a2)
         b_check, a_check = (np.array([2.49206659e-05, 1.49523995e-04, 3.73809988e-04,
                                       4.98413317e-04, 3.73809988e-04, 1.49523995e-04,
