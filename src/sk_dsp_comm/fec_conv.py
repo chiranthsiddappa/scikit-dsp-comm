@@ -68,9 +68,9 @@ class TrellisNodes(object):
     """
     def __init__(self,Ns):
         self.Ns = Ns
-        self.fn = np.zeros((Ns,1),dtype=int) 
-        self.tn = np.zeros((Ns,1),dtype=int)
-        self.out_bits = np.zeros((Ns,1),dtype=int)
+        self.fn = np.zeros((Ns),dtype=int)
+        self.tn = np.zeros((Ns),dtype=int)
+        self.out_bits = np.zeros((Ns),dtype=int)
 
 
 class TrellisBranches(object):
@@ -81,12 +81,12 @@ class TrellisBranches(object):
     """
     def __init__(self,Ns):
         self.Ns = Ns
-        self.states1 = np.zeros((Ns,1),dtype=int)
-        self.states2 = np.zeros((Ns,1),dtype=int)
-        self.bits1 = np.zeros((Ns,1),dtype=int)
-        self.bits2 = np.zeros((Ns,1),dtype=int)
-        self.input1 = np.zeros((Ns,1),dtype=int)
-        self.input2 = np.zeros((Ns,1),dtype=int)
+        self.states1 = np.zeros((Ns),dtype=int)
+        self.states2 = np.zeros((Ns),dtype=int)
+        self.bits1 = np.zeros((Ns),dtype=int)
+        self.bits2 = np.zeros((Ns),dtype=int)
+        self.input1 = np.zeros((Ns),dtype=int)
+        self.input2 = np.zeros((Ns),dtype=int)
 
 
 class TrellisPaths(object):
@@ -733,19 +733,20 @@ class FECConv(object):
 
         plt.plot(0,0,'.')
         plt.axis([-0.01, 1.01, -(self.Nstates-1)-0.05, 0.05])
+        x_axis = np.arange(1)
         for m in range(self.Nstates):
             if branches_from.input1[m] == 0:
-                plt.plot([0, 1],[-branches_from.states1[m], [-m]],'b')
-                plt.plot([0, 1],[-branches_from.states1[m], [-m]],'r.')
+                plt.plot(x_axis,[-branches_from.states1[m], -m],'b')
+                plt.plot(x_axis,[-branches_from.states1[m], -m],'r.')
             if branches_from.input2[m] == 0:
-                plt.plot([0, 1],[-branches_from.states2[m], [-m]],'b')
-                plt.plot([0, 1],[-branches_from.states2[m], [-m]],'r.')
+                plt.plot(x_axis,[-branches_from.states2[m], -m],'b')
+                plt.plot(x_axis,[-branches_from.states2[m], -m],'r.')
             if branches_from.input1[m] == 1:
-                plt.plot([0, 1],[-branches_from.states1[m], [-m]],'g')
-                plt.plot([0, 1],[-branches_from.states1[m], [-m]],'r.')
+                plt.plot(x_axis,[-branches_from.states1[m], -m],'g')
+                plt.plot(x_axis,[-branches_from.states1[m], -m],'r.')
             if branches_from.input2[m] == 1:
-                plt.plot([0, 1],[-branches_from.states2[m], [-m]],'g')
-                plt.plot([0, 1],[-branches_from.states2[m], [-m]],'r.')
+                plt.plot(x_axis,[-branches_from.states2[m], -m],'g')
+                plt.plot(x_axis,[-branches_from.states2[m], -m],'r.')
         #plt.grid()
         plt.xlabel('One Symbol Transition')
         plt.ylabel('-State Index')
